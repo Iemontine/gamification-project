@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwobn4qvrbb0"]
+
+[ext_resource type="Texture2D" uid="uid://dl7f6ysghtl2w" path="res://icon.svg" id="1_cmw8w"]
+[ext_resource type="Script" uid="uid://ca10y2eevay2g" path="res://player.gd" id="2_or1io"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kufn"]
+size = Vector2(1152, 56)
+
+[sub_resource type="Gradient" id="Gradient_6kufn"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cmw8w"]
+gradient = SubResource("Gradient_6kufn")
+width = 1149
+height = 56
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmw8w"]
+radius = 32.0
+height = 112.0
+
+[node name="Platformer" type="Node2D"]
+
+[node name="BoundingBox" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundingBox"]
+polygon = PackedVector2Array(1216, -64, 1152, 0, 0, 0, 0, 648, 1152, 648, 1152, 0, 1216, -64, 1216, 704, -72, 704, -64, -64)
+
+[node name="Environment" type="CanvasGroup" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D"]
+position = Vector2(576, 620)
+shape = SubResource("RectangleShape2D_6kufn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/StaticBody2D"]
+position = Vector2(576, 620)
+texture = SubResource("GradientTexture2D_cmw8w")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(575.5, 296)
+scale = Vector2(8.99219, 4.625)
+texture = ExtResource("1_cmw8w")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(576, 536)
+script = ExtResource("2_or1io")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_cmw8w")

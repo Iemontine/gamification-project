@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://6klr4h2xrtnb"]
+
+[ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron.tscn" id="1_fyqef"]
+[ext_resource type="Script" uid="uid://budj5i72ek58w" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="1_nltto"]
+[ext_resource type="Script" uid="uid://bkacjpeepn4sq" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="2_ibotj"]
+[ext_resource type="PackedScene" uid="uid://cwobn4qvrbb0" path="res://platformer.tscn" id="2_m6e0p"]
+[ext_resource type="Script" uid="uid://bkr04mb1owt5g" path="res://scroller.gd" id="3_ibotj"]
+
+[sub_resource type="Resource" id="Resource_n5ude"]
+script = ExtResource("2_ibotj")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Resource" id="Resource_y4yjw"]
+script = ExtResource("2_ibotj")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_m6e0p"]
+font_size = 46
+
+[node name="ScrollableContent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("1_nltto")
+wheel_scroll_damper = SubResource("Resource_n5ude")
+dragging_scroll_damper = SubResource("Resource_y4yjw")
+metadata/_custom_type_script = ExtResource("1_nltto")
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ContentContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_ibotj")
+
+[node name="Title" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/CenterContainer/ContentContainer/Title"]
+custom_minimum_size = Vector2(0, 43.65)
+layout_mode = 2
+mouse_filter = 1
+text = "Test"
+label_settings = SubResource("LabelSettings_m6e0p")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Panel" type="Panel" parent="ScrollContainer/CenterContainer/ContentContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Node2D" parent="ScrollContainer/CenterContainer/ContentContainer/Panel" instance=ExtResource("1_fyqef")]
+position = Vector2(296, 72)
+
+[node name="Section1" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/CenterContainer/ContentContainer/Section1"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+mouse_filter = 1
+text = "Lorem."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(0, 411.92)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Platformer" parent="ScrollContainer/CenterContainer/ContentContainer/PanelContainer" instance=ExtResource("2_m6e0p")]
+position = Vector2(30, 30)
+scale = Vector2(0.47, 0.47)
+
+[node name="RevealButton" type="Button" parent="ScrollContainer/CenterContainer/ContentContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Next"
