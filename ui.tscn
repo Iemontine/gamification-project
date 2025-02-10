@@ -55,7 +55,6 @@ alignment = 1
 script = ExtResource("3_ibotj")
 
 [node name="Title" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 1
@@ -71,7 +70,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Panel" type="Panel" parent="ScrollContainer/CenterContainer/ContentContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 mouse_filter = 1
@@ -80,7 +78,6 @@ mouse_filter = 1
 position = Vector2(296, 72)
 
 [node name="Section1" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
-visible = false
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 mouse_filter = 1
@@ -95,7 +92,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
-visible = false
 clip_contents = true
 custom_minimum_size = Vector2(0, 411.92)
 layout_mode = 2
@@ -109,3 +105,5 @@ scale = Vector2(0.47, 0.47)
 layout_mode = 2
 mouse_filter = 1
 text = "Next"
+
+[connection signal="pressed" from="ScrollContainer/CenterContainer/ContentContainer/RevealButton" to="ScrollContainer/CenterContainer/ContentContainer" method="_on_reveal_button_pressed"]
