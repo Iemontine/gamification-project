@@ -29,13 +29,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 script = ExtResource("1_nltto")
@@ -43,23 +46,23 @@ wheel_scroll_damper = SubResource("Resource_n5ude")
 dragging_scroll_damper = SubResource("Resource_y4yjw")
 metadata/_custom_type_script = ExtResource("1_nltto")
 
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ContentContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer"]
+[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/CenterContainer"]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 alignment = 1
 script = ExtResource("3_ibotj")
 
-[node name="Title" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
+[node name="Title" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="Label" type="Label" parent="ScrollContainer/CenterContainer/ContentContainer/Title"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Title"]
 custom_minimum_size = Vector2(0, 43.65)
 layout_mode = 2
 mouse_filter = 1
@@ -69,41 +72,63 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Panel" type="Panel" parent="ScrollContainer/CenterContainer/ContentContainer"]
-custom_minimum_size = Vector2(0, 150)
+[node name="Section1" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
 layout_mode = 2
 mouse_filter = 1
 
-[node name="Node2D" parent="ScrollContainer/CenterContainer/ContentContainer/Panel" instance=ExtResource("1_fyqef")]
+[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1"]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
+custom_minimum_size = Vector2(0, 151.345)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="Node2D" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/Panel" instance=ExtResource("1_fyqef")]
 position = Vector2(296, 72)
 
-[node name="Section1" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
-custom_minimum_size = Vector2(500, 200)
+[node name="Section1" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
 layout_mode = 2
 mouse_filter = 1
 
-[node name="Label" type="Label" parent="ScrollContainer/CenterContainer/ContentContainer/Section1"]
-custom_minimum_size = Vector2(600, 400)
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/Section1"]
+custom_minimum_size = Vector2(0, 3.65)
 layout_mode = 2
 mouse_filter = 1
-text = "Lorem."
+text = "This is a neuron. It works like this."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/CenterContainer/ContentContainer"]
+[node name="GridContainer" type="HSplitContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/GridContainer"]
+custom_minimum_size = Vector2(365.045, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="NextButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Next"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 411.92)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="Platformer" parent="ScrollContainer/CenterContainer/ContentContainer/PanelContainer" instance=ExtResource("2_m6e0p")]
+[node name="Platformer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/PanelContainer" instance=ExtResource("2_m6e0p")]
 position = Vector2(30, 30)
 scale = Vector2(0.47, 0.47)
 
-[node name="RevealButton" type="Button" parent="ScrollContainer/CenterContainer/ContentContainer"]
+[node name="RevealButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
 layout_mode = 2
 mouse_filter = 1
 text = "Next"
 
-[connection signal="pressed" from="ScrollContainer/CenterContainer/ContentContainer/RevealButton" to="ScrollContainer/CenterContainer/ContentContainer" method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/RevealButton" to="MarginContainer/ScrollContainer/CenterContainer/ContentContainer" method="_on_reveal_button_pressed"]
