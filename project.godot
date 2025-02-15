@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gamification-project"
-run/main_scene="uid://6klr4h2xrtnb"
+run/main_scene="uid://cptj3m7nmaarl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,4 +27,4 @@ enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg")
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.00069703, 0.132446, 0.538809, 1)
+environment/defaults/default_clear_color=Color(0.903598, 0.903598, 0.903598, 1)

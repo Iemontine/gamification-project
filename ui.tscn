@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6klr4h2xrtnb"]
+[gd_scene load_steps=11 format=3 uid="uid://6klr4h2xrtnb"]
 
 [ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron.tscn" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://budj5i72ek58w" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="1_nltto"]
@@ -18,8 +18,14 @@ friction = 4.0
 minimum_velocity = 0.4
 rebound_strength = 7.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibotj"]
+bg_color = Color(1, 0.74902, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_m6e0p"]
 font_size = 46
+font_color = Color(0.00784314, 0.156863, 0.317647, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibotj"]
 
 [node name="ScrollableContent" type="Control"]
 layout_mode = 3
@@ -52,13 +58,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ContentContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/CenterContainer"]
-custom_minimum_size = Vector2(600, 400)
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 alignment = 1
 script = ExtResource("3_ibotj")
 
 [node name="Title" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 mouse_filter = 1
 
@@ -66,6 +72,7 @@ mouse_filter = 1
 custom_minimum_size = Vector2(0, 43.65)
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_ibotj")
 text = "Test"
 label_settings = SubResource("LabelSettings_m6e0p")
 horizontal_alignment = 1
@@ -82,13 +89,12 @@ layout_mode = 2
 alignment = 1
 
 [node name="Panel" type="Panel" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
-custom_minimum_size = Vector2(0, 151.345)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_horizontal = 4
+size_flags_vertical = 6
 mouse_filter = 1
 
 [node name="Node2D" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/Panel" instance=ExtResource("1_fyqef")]
-position = Vector2(296, 72)
 
 [node name="Section1" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
 layout_mode = 2
@@ -110,6 +116,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(365.045, 0)
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ibotj")
 
 [node name="NextButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/GridContainer"]
 layout_mode = 2
@@ -123,8 +130,8 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="Platformer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/PanelContainer" instance=ExtResource("2_m6e0p")]
-position = Vector2(30, 30)
-scale = Vector2(0.47, 0.47)
+position = Vector2(90, 30)
+scale = Vector2(0.45, 0.45)
 
 [node name="RevealButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
 layout_mode = 2

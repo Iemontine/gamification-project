@@ -28,7 +28,7 @@ func _on_reveal_button_pressed() -> void:
 		content[content_pos].visible = true
 		
 		# Check if the container has a Label child
-		for child in content[content_pos].get_children():
+		for child in content[content_pos].find_children("Label", "", true):
 			if child is Label:
 				await show_text_gradually(child)
 		

@@ -37,3 +37,10 @@ grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_pliy4")
+
+[node name="TextEdit" type="TextEdit" parent="RigidBody2D"]
+offset_left = -183.0
+offset_top = -55.0
+offset_right = -82.0
+offset_bottom = -14.0
+placeholder_text = "Type here"
