@@ -1,39 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://6klr4h2xrtnb"]
+[gd_scene load_steps=6 format=3 uid="uid://cptj3m7nmaarl"]
 
 [ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron.tscn" id="1_fyqef"]
-[ext_resource type="Script" uid="uid://budj5i72ek58w" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="1_nltto"]
-[ext_resource type="Script" uid="uid://bkacjpeepn4sq" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="2_ibotj"]
-[ext_resource type="PackedScene" uid="uid://cwobn4qvrbb0" path="res://platformer.tscn" id="2_m6e0p"]
-[ext_resource type="Script" uid="uid://bkr04mb1owt5g" path="res://scroller.gd" id="3_ibotj"]
+[ext_resource type="Script" uid="uid://b7je2mjbc7mpj" path="res://scripts/ui.gd" id="1_m6e0p"]
+[ext_resource type="PackedScene" uid="uid://2ybr30vvokrg" path="res://network.tscn" id="2_27fn8"]
 
-[sub_resource type="Resource" id="Resource_n5ude"]
-script = ExtResource("2_ibotj")
-friction = 4.0
-minimum_velocity = 0.4
-rebound_strength = 7.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drk0o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.74558, 0.74558, 0.74558, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="Resource" id="Resource_y4yjw"]
-script = ExtResource("2_ibotj")
-friction = 4.0
-minimum_velocity = 0.4
-rebound_strength = 7.0
+[sub_resource type="LabelSettings" id="LabelSettings_drk0o"]
+font_color = Color(0.118581, 0.118581, 0.118581, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibotj"]
-bg_color = Color(1, 0.74902, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_m6e0p"]
-font_size = 46
-font_color = Color(0.00784314, 0.156863, 0.317647, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibotj"]
-
-[node name="ScrollableContent" type="Control"]
+[node name="Ui2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_m6e0p")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -43,99 +36,139 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
-layout_mode = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-script = ExtResource("1_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
-metadata/_custom_type_script = ExtResource("1_nltto")
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/ScrollContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/CenterContainer"]
-custom_minimum_size = Vector2(700, 0)
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer"]
 layout_mode = 2
-alignment = 1
-script = ExtResource("3_ibotj")
+columns = 3
 
-[node name="Title" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
-custom_minimum_size = Vector2(700, 0)
+[node name="BackButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
-mouse_filter = 1
+text = "Back"
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Title"]
-custom_minimum_size = Vector2(0, 43.65)
-layout_mode = 2
-mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxFlat_ibotj")
-text = "Test"
-label_settings = SubResource("LabelSettings_m6e0p")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Section1" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1"]
-custom_minimum_size = Vector2(600, 250)
-layout_mode = 2
-alignment = 1
-
-[node name="Panel" type="Panel" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 1
-
-[node name="Node2D" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/Panel" instance=ExtResource("1_fyqef")]
-
-[node name="Section1" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/Section1"]
-custom_minimum_size = Vector2(0, 3.65)
-layout_mode = 2
-mouse_filter = 1
-text = "This is a neuron. It works like this."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="GridContainer" type="HSplitContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/GridContainer"]
-custom_minimum_size = Vector2(365.045, 0)
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 15)
 layout_mode = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ibotj")
+show_percentage = false
 
-[node name="NextButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/Section1/ContentContainer/GridContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
-mouse_filter = 1
-text = "Next"
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
+[node name="Page1" type="CenterContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="Section1" type="Control" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1"]
+visible = false
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section1"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_drk0o")
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section1"]
+layout_mode = 2
+offset_left = -64.0
+offset_top = -12.0
+offset_right = 63.0
+offset_bottom = 11.0
+text = "This is a neuron."
+label_settings = SubResource("LabelSettings_drk0o")
+
+[node name="Neuron" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section1" instance=ExtResource("1_fyqef")]
+position = Vector2(0, -88)
+
+[node name="Section2" type="Control" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section2"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_drk0o")
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section2"]
+layout_mode = 2
+offset_left = -64.0
+offset_top = -12.0
+offset_right = 63.0
+offset_bottom = 11.0
+text = "It is really funny."
+label_settings = SubResource("LabelSettings_drk0o")
+
+[node name="Neuron" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page1/Section2" instance=ExtResource("1_fyqef")]
+position = Vector2(0, -88)
+
+[node name="Page2" type="CenterContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page2"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_drk0o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Control" type="AspectRatioContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page2/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(0, 411.92)
+custom_minimum_size = Vector2(532.86, 300)
 layout_mode = 2
-mouse_filter = 1
 
-[node name="Platformer" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/PanelContainer" instance=ExtResource("2_m6e0p")]
-position = Vector2(90, 30)
-scale = Vector2(0.45, 0.45)
+[node name="Network" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page2/VBoxContainer/Control" instance=ExtResource("2_27fn8")]
+scale = Vector2(0.462552, 0.462552)
 
-[node name="RevealButton" type="Button" parent="MarginContainer/ScrollContainer/CenterContainer/ContentContainer"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page2/VBoxContainer"]
 layout_mode = 2
-mouse_filter = 1
+text = "This is the text on page 2"
+label_settings = SubResource("LabelSettings_drk0o")
+
+[node name="Page3" type="CenterContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page3"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_drk0o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer/Page3/VBoxContainer"]
+layout_mode = 2
+text = "This is the text on page 3"
+label_settings = SubResource("LabelSettings_drk0o")
+
+[node name="NextButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
+layout_mode = 2
 text = "Next"
 
-[connection signal="pressed" from="MarginContainer/ScrollContainer/CenterContainer/ContentContainer/RevealButton" to="MarginContainer/ScrollContainer/CenterContainer/ContentContainer" method="_on_reveal_button_pressed"]
+[node name="UnlockButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "unlock"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="UnlockButton" to="." method="unlock_current_step"]

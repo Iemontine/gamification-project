@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ybr30vvokrg"]
+
+[ext_resource type="Script" uid="uid://dryaf2btdusgk" path="res://scripts/network.gd" id="1_n0pfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36nuw"]
+size = Vector2(1152, 648)
+
+[node name="Network" type="Node2D"]
+script = ExtResource("1_n0pfp")
+
+[node name="BoundingBox" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundingBox"]
+polygon = PackedVector2Array(1216, -64, 1160, -8, -8, -8, -8, 656, 1160, 656, 1160, -8, 1216, -64, 1216, 704, -72, 704, -64, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundingBox"]
+visible = false
+position = Vector2(576, 324)
+shape = SubResource("RectangleShape2D_36nuw")
