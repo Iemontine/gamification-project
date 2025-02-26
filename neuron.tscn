@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2rto2wwl4q0"]
+[gd_scene load_steps=8 format=3 uid="uid://d2rto2wwl4q0"]
+
+[ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="1_mms1l"]
+[ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="1_pliy4"]
+[ext_resource type="Script" uid="uid://bjxbv8yqv7a18" path="res://lamp.gd" id="2_j2aws"]
 
 [sub_resource type="Gradient" id="Gradient_hrwgj"]
 offsets = PackedFloat32Array(0.959432, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+colors = PackedColorArray(0.31802, 0.31802, 0.31802, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mms1l"]
 gradient = SubResource("Gradient_hrwgj")
@@ -12,7 +16,43 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.2)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2aws"]
+light_mode = 1
+
+[sub_resource type="Curve2D" id="Curve2D_j2aws"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 50, -50, 2.91911, -52.8432, -2.91911, 52.8432, 0, -1, 0, 0, 0, 0, -55, 50)
+}
+point_count = 3
+
 [node name="Neuron" type="Node2D"]
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = -236.0
+offset_top = -48.0
+offset_right = -100.0
+offset_bottom = -10.0
+
+[node name="HSlider2" type="HSlider" parent="."]
+offset_left = -236.0
+offset_top = 10.0
+offset_right = -100.0
+offset_bottom = 48.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_mms1l")
+
+[node name="Lamp" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_j2aws")
+position = Vector2(118, 7)
+scale = Vector2(0.0608333, 0.0608333)
+texture = ExtResource("1_pliy4")
+script = ExtResource("2_j2aws")
+
+[node name="Light" type="PointLight2D" parent="Lamp"]
+position = Vector2(0, -65.7534)
+scale = Vector2(4.68493, 4.68493)
+texture = ExtResource("1_mms1l")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_j2aws")

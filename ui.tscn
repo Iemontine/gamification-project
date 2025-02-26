@@ -52,7 +52,10 @@ text = "Back"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(600, 15)
 layout_mode = 2
 show_percentage = false

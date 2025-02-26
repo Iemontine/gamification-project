@@ -22,7 +22,7 @@ var is_animating = false
 @onready var pages = []
 var sections_per_page = []
 var total_steps = 0
-var unlocked_steps = []
+var locked = []
 var current_step = 0
 
 
@@ -36,9 +36,10 @@ func _ready():
 		sections_per_page.append(sections)
 		total_steps += max(1, sections.size())
 	
-	# Initialize with first step unlocked
-	unlocked_steps.resize(total_steps)
-	unlocked_steps[0] = true
+	# Initialize with first step unlocked (false = unlocked)
+	locked.resize(total_steps)
+	locked.fill(true)  # Lock all steps
+	locked[0] = false  # Unlock first step
 
 
 func _input(event):
@@ -78,8 +79,8 @@ func navigate(direction):
 		else:
 			return
 			
-		# Check if next step is unlocked
-		if not unlocked_steps[next_step]:
+		# Check if the current step is locked
+		if locked[current_step]:
 			return
 	else:
 		# Moving backward always allowed
@@ -175,13 +176,16 @@ func animate_transition(next_page: int, next_section: int):
 func get_label(page_or_section: Control) -> Label:
 	return page_or_section.find_children("Label", "Label", true)[0]
 
-func display_text(control: Control):
-	var label = get_label(control)
-	if unlocked_steps[current_step]:
+func display_text(section: Control):
+	var label = get_label(section)	# Get the label node of the section
+	
+	if not locked[current_step]:
+		print("unlocked")
 		# If step is unlocked, show text immediately
 		label.visible_characters = -1
 		text_display_finished.emit()
 	else:
+		print("locked")
 		# If step is locked, show text gradually
 		show_text_gradually(label)
 
@@ -196,11 +200,13 @@ func show_text_gradually(label: Label) -> void:
 	
 	text_display_finished.emit()
 
+# TODO: currently called by the unlock button, fix. 
 func unlock_current_step():
-	unlocked_steps[current_step] = true
-	# Unlock next step if it exists
+	print(current_step)
+	locked[current_step] = false  # False means unlocked
+
 	if current_step + 1 < total_steps:
-		unlocked_steps[current_step + 1] = true
+		locked[current_step + 1] = true
 		print("Unlocked step ", current_step)
 
 func get_step_index(page: int, section: int) -> int:
@@ -209,5 +215,5 @@ func get_step_index(page: int, section: int) -> int:
 		step += max(1, sections_per_page[i].size())
 	return step + section
 
-func is_current_step_locked() -> bool:
-	return not unlocked_steps[current_step]
+# func is_current_step_locked() -> bool:
+# 	return locked[current_step]
