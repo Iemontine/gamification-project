@@ -15,7 +15,7 @@ var page_height = 600
 var is_animating = false
 
 
-@onready var container = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/CenterContainer
+@onready var container = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer
 @onready var progress_bar = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/ProgressBar
 @onready var back_button: Button = $MarginContainer/CenterContainer/GridContainer/BackButton
 @onready var next_button: Button = $MarginContainer/CenterContainer/GridContainer/NextButton
@@ -46,10 +46,10 @@ func _input(event):
 	if is_animating:
 		return
 		
-	if event.is_action_pressed("ui_down") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN):
-		navigate(1)
-	elif event.is_action_pressed("ui_up") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP):
-		navigate(-1)
+	# if event.is_action_pressed("ui_down") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN):
+	# 	navigate(1)
+	# elif event.is_action_pressed("ui_up") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP):
+	# 	navigate(-1)
 
 
 func _on_next_button_pressed():

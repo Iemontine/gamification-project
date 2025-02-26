@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2rto2wwl4q0"]
+
+[ext_resource type="Script" uid="uid://bhcutbc8g8em" path="res://neuron.gd" id="1_hmcdc"]
+[ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="2_qagqb"]
+[ext_resource type="Script" path="res://lamp.gd" id="3_ril1o"]
+[ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="4_j2ct8"]
+
+[sub_resource type="Gradient" id="Gradient_hrwgj"]
+offsets = PackedFloat32Array(0.959432, 1)
+colors = PackedColorArray(0.248401, 0.2484, 0.2484, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mms1l"]
+gradient = SubResource("Gradient_hrwgj")
+width = 150
+height = 150
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.2)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2aws"]
+light_mode = 1
+
+[sub_resource type="Curve2D" id="Curve2D_j2aws"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -50, 50, 0, 50, 0, -50, 0, -1, 0, 0, 0, 0, 50, -50)
+}
+point_count = 3
+
+[sub_resource type="GDScript" id="GDScript_hmcdc"]
+script/source = "@tool
+
+
+extends Path2D
+
+
+@onready var line_2d: Line2D = $Line2D
+
+
+func _ready() -> void:
+	if line_2d:
+		var points = curve.get_baked_points()
+		line_2d.points = points
+"
+
+[sub_resource type="Gradient" id="Gradient_hmcdc"]
+offsets = PackedFloat32Array(0.959432, 1)
+colors = PackedColorArray(0.188235, 0.54902, 0.427451, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qagqb"]
+gradient = SubResource("Gradient_hmcdc")
+width = 70
+height = 70
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.2)
+
+[node name="NeuronSlider" type="Node2D"]
+script = ExtResource("1_hmcdc")
+
+[node name="Slider1" type="HSlider" parent="."]
+offset_left = -236.0
+offset_top = -50.0
+offset_right = -100.0
+offset_bottom = -12.0
+max_value = 1.0
+step = 0.05
+
+[node name="Slider2" type="HSlider" parent="."]
+offset_left = -236.0
+offset_top = 13.0
+offset_right = -100.0
+offset_bottom = 51.0
+max_value = 1.0
+step = 0.05
+
+[node name="Neuron" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_mms1l")
+
+[node name="Lamp" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_j2aws")
+position = Vector2(150, 1)
+scale = Vector2(0.0608333, 0.0608333)
+texture = ExtResource("2_qagqb")
+script = ExtResource("3_ril1o")
+
+[node name="Light" type="PointLight2D" parent="Lamp"]
+position = Vector2(0, -65.7534)
+scale = Vector2(4.68493, 4.68493)
+texture = ExtResource("4_j2ct8")
+
+[node name="ThresholdSlider" type="HSlider" parent="."]
+offset_left = -68.0
+offset_top = 74.0
+offset_right = 68.0
+offset_bottom = 112.0
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="ActivationFunction" type="Path2D" parent="."]
+curve = SubResource("Curve2D_j2aws")
+script = SubResource("GDScript_hmcdc")
+
+[node name="GraphPos" type="Sprite2D" parent="ActivationFunction"]
+scale = Vector2(0.2, 0.2)
+texture = SubResource("GradientTexture2D_qagqb")
+
+[node name="Threshold" type="Line2D" parent="ActivationFunction"]
+points = PackedVector2Array(0, 70, 0, -70)
+width = 3.025
+default_color = Color(1, 0, 0, 1)
+
+[node name="Line2D" type="Line2D" parent="ActivationFunction"]
+points = PackedVector2Array(-50, 50, -47.8516, 49.8594, -45.3857, 49.5781, -42.1875, 49.0625, -38.4033, 48.2422, -34.1797, 47.0469, -29.6631, 45.4063, -27.3407, 44.397, -25, 43.25, -22.6593, 41.9565, -20.3369, 40.5078, -18.0511, 38.895, -15.8203, 37.1094, -13.6627, 35.1421, -11.5967, 32.9844, -9.6405, 30.6274, -7.8125, 28.0625, -6.13098, 25.2808, -4.61426, 22.2734, -3.28064, 19.0317, -2.14844, 15.5469, -1.23596, 11.8101, -0.561523, 7.8125, -0.143433, 3.54541, 0, -1, 0.143433, -5.53967, 0.561523, -9.79004, 1.23596, -13.7606, 2.14844, -17.4609, 3.28064, -20.9005, 4.61426, -24.0889, 6.13098, -27.0355, 7.8125, -29.75, 9.6405, -32.2418, 11.5967, -34.5205, 13.6627, -36.5956, 15.8203, -38.4766, 18.0511, -40.173, 20.3369, -41.6943, 22.6593, -43.0502, 25, -44.25, 27.3407, -45.3033, 29.6631, -46.2197, 34.1797, -47.6797, 38.4033, -48.7061, 42.1875, -49.375, 45.3857, -49.7627, 47.8516, -49.9453, 50, -50)
+width = 3.0
+default_color = Color(0.188235, 0.54902, 0.427451, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="value_changed" from="Slider1" to="." method="_on_slider_changed"]
+[connection signal="value_changed" from="Slider2" to="." method="_on_slider_changed"]
+[connection signal="value_changed" from="ThresholdSlider" to="." method="_on_slider_changed"]
