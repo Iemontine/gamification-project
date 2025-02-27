@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhcutbc8g8em" path="res://neuron.gd" id="1_hmcdc"]
 [ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="2_qagqb"]
-[ext_resource type="Script" path="res://lamp.gd" id="3_ril1o"]
+[ext_resource type="Script" uid="uid://bjxbv8yqv7a18" path="res://lamp.gd" id="3_ril1o"]
 [ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="4_j2ct8"]
 
 [sub_resource type="Gradient" id="Gradient_hrwgj"]
@@ -114,8 +114,6 @@ default_color = Color(1, 0, 0, 1)
 points = PackedVector2Array(-50, 50, -47.8516, 49.8594, -45.3857, 49.5781, -42.1875, 49.0625, -38.4033, 48.2422, -34.1797, 47.0469, -29.6631, 45.4063, -27.3407, 44.397, -25, 43.25, -22.6593, 41.9565, -20.3369, 40.5078, -18.0511, 38.895, -15.8203, 37.1094, -13.6627, 35.1421, -11.5967, 32.9844, -9.6405, 30.6274, -7.8125, 28.0625, -6.13098, 25.2808, -4.61426, 22.2734, -3.28064, 19.0317, -2.14844, 15.5469, -1.23596, 11.8101, -0.561523, 7.8125, -0.143433, 3.54541, 0, -1, 0.143433, -5.53967, 0.561523, -9.79004, 1.23596, -13.7606, 2.14844, -17.4609, 3.28064, -20.9005, 4.61426, -24.0889, 6.13098, -27.0355, 7.8125, -29.75, 9.6405, -32.2418, 11.5967, -34.5205, 13.6627, -36.5956, 15.8203, -38.4766, 18.0511, -40.173, 20.3369, -41.6943, 22.6593, -43.0502, 25, -44.25, 27.3407, -45.3033, 29.6631, -46.2197, 34.1797, -47.6797, 38.4033, -48.7061, 42.1875, -49.375, 45.3857, -49.7627, 47.8516, -49.9453, 50, -50)
 width = 3.0
 default_color = Color(0.188235, 0.54902, 0.427451, 1)
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="value_changed" from="Slider1" to="." method="_on_slider_changed"]
 [connection signal="value_changed" from="Slider2" to="." method="_on_slider_changed"]
