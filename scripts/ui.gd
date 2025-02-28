@@ -7,8 +7,8 @@ var current_page = 0
 
 @onready var container = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer
 @onready var progress_bar: ProgressBar = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/ProgessContainer/ProgressBar
-@onready var back_button: Button = $MarginContainer/CenterContainer/GridContainer/BackButton
-@onready var next_button: Button = $MarginContainer/CenterContainer/GridContainer/NextButton
+#@onready var back_button: Button = $MarginContainer/CenterContainer/GridContainer/BackButton
+#@onready var next_button: Button = $MarginContainer/CenterContainer/GridContainer/NextButton
 @onready var pages = []
 var total_steps = 0
 var locked = []

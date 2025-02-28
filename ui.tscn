@@ -1,10 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://cptj3m7nmaarl"]
+[gd_scene load_steps=14 format=3 uid="uid://cptj3m7nmaarl"]
 
 [ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron_slider.tscn" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://b7je2mjbc7mpj" path="res://scripts/ui.gd" id="1_m6e0p"]
+[ext_resource type="Script" uid="uid://yoefhs7bu1ks" path="res://page.gd" id="2_n5ude"]
 [ext_resource type="Script" uid="uid://budj5i72ek58w" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="2_nltto"]
 [ext_resource type="Script" uid="uid://bkacjpeepn4sq" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="3_ibotj"]
 [ext_resource type="Texture2D" uid="uid://deyt5hjgo2irv" path="res://assets/neuron_explainer.jpg" id="4_ibotj"]
+[ext_resource type="Texture2D" uid="uid://d1lhjnlp6j5dk" path="res://artvbio.png" id="6_y4yjw"]
+[ext_resource type="Texture2D" uid="uid://c5twhsascw63f" path="res://exampls.png" id="7_waa4j"]
+
+[sub_resource type="Resource" id="Resource_ibotj"]
+script = ExtResource("3_ibotj")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Resource" id="Resource_waa4j"]
+script = ExtResource("3_ibotj")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Theme" id="Theme_n5ude"]
 
 [sub_resource type="Resource" id="Resource_n5ude"]
 script = ExtResource("3_ibotj")
@@ -17,8 +34,6 @@ script = ExtResource("3_ibotj")
 friction = 4.0
 minimum_velocity = 0.4
 rebound_strength = 7.0
-
-[sub_resource type="Theme" id="Theme_n5ude"]
 
 [node name="Ui2" type="Control"]
 layout_mode = 3
@@ -62,19 +77,21 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Page1" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-custom_minimum_size = Vector2(500, 550)
+custom_minimum_size = Vector2(608, 600)
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
-hide_scrollbar_over_time = true
+wheel_scroll_damper = SubResource("Resource_ibotj")
+dragging_scroll_damper = SubResource("Resource_waa4j")
+allow_horizontal_scroll = false
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1"]
 layout_mode = 2
+script = ExtResource("2_n5ude")
 
 [node name="Section1" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
 [node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
@@ -85,7 +102,6 @@ theme_override_constants/margin_top = 30
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element1"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
@@ -103,43 +119,19 @@ texture = ExtResource("4_ibotj")
 expand_mode = 5
 
 [node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
-custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3"]
-layout_mode = 2
-vertical = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+text = "One neuron doesn't talk directly with all 80 billion others. Rather, they are connected into structures that perform specialized functions. These structures are [b]biological neural networks.[/b]"
 fit_content = true
 horizontal_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer"]
-layout_mode = 2
-columns = 3
-
-[node name="Button" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
-layout_mode = 2
-mouse_filter = 1
-text = "Answer1"
-
-[node name="Button2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
-layout_mode = 2
-mouse_filter = 1
-text = "Answer2"
-
-[node name="Button3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
-layout_mode = 2
-mouse_filter = 1
-text = "Answer3"
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
 layout_mode = 2
@@ -147,6 +139,7 @@ mouse_filter = 1
 text = "Continue"
 
 [node name="Section2" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
@@ -160,75 +153,159 @@ mouse_filter = 1
 theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+text = "The human brain is too complex to discuss in much detail here, but we don't need to know all the details to land on its most important characteristic — “Brains [b]learn[/b] from experience.”"
 fit_content = true
 horizontal_alignment = 1
 
 [node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element2"]
-layout_mode = 2
-texture = ExtResource("4_ibotj")
-expand_mode = 5
-
 [node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
-custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3"]
-layout_mode = 2
-vertical = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+text = "Each time you learn a new game, a dance, or a mathematical skill, neurons in your brain strengthen their lines of communication with some neurons and prune their connections to others."
 fit_content = true
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer"]
-layout_mode = 2
-columns = 3
-
-[node name="Button" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+[node name="ContinueButton2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 1
-text = "Answer1"
+text = "Continue"
 
-[node name="Button2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+[node name="Section3" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element1"]
 layout_mode = 2
 mouse_filter = 1
-text = "Answer2"
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[b]Artifical Neural Networks[/b] — ANNs, for short — were invented in order to understand and emulate the functions of the mammalian brain."
+fit_content = true
+horizontal_alignment = 1
 
-[node name="Button3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element2"]
+layout_mode = 2
+texture = ExtResource("6_y4yjw")
+expand_mode = 5
+
+[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element3"]
 layout_mode = 2
 mouse_filter = 1
-text = "Answer3"
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "But, in recent years, they have taken on a life of their own."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="ContinueButton3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "Continue"
+
+[node name="Section4" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element1"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Computers today can follow billions of individual instructions each second. This explosion in computing power has let scientists build ANNs that learn to identify people in images, play chess, and even help doctors make medical diagnoses."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element2"]
+layout_mode = 2
+texture = ExtResource("7_waa4j")
+expand_mode = 5
+
+[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element3"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "In other words, ANNs learn to do complex tasks that previously only humans could do.
+At the end of this lesson, you'll have an opportunity to play with an ANN that we've taught to see, but it will make more sense to get acquainted with the basics of how ANNs work first.
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "Next"
 
 [node name="Page2" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
-custom_minimum_size = Vector2(500, 550)
+custom_minimum_size = Vector2(608, 600)
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
 wheel_scroll_damper = SubResource("Resource_n5ude")
 dragging_scroll_damper = SubResource("Resource_y4yjw")
+allow_horizontal_scroll = false
 hide_scrollbar_over_time = true
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
 [node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 30
 
@@ -243,7 +320,7 @@ fit_content = true
 horizontal_alignment = 1
 
 [node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 30
 
@@ -252,16 +329,17 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="NeuronSlider" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Element2/Panel" instance=ExtResource("1_fyqef")]
-position = Vector2(275, 50)
+position = Vector2(300, 50)
 
 [node name="Page3" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
-custom_minimum_size = Vector2(500, 550)
+custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
 wheel_scroll_damper = SubResource("Resource_n5ude")
 dragging_scroll_damper = SubResource("Resource_y4yjw")
+allow_horizontal_scroll = false
 hide_scrollbar_over_time = true
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
@@ -285,12 +363,13 @@ horizontal_alignment = 1
 
 [node name="Page4" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
-custom_minimum_size = Vector2(500, 550)
+custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
 wheel_scroll_damper = SubResource("Resource_n5ude")
 dragging_scroll_damper = SubResource("Resource_y4yjw")
+allow_horizontal_scroll = false
 hide_scrollbar_over_time = true
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
@@ -314,7 +393,7 @@ horizontal_alignment = 1
 
 [node name="Page5" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
-custom_minimum_size = Vector2(500, 550)
+custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
@@ -347,4 +426,28 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "unlock"
 
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+offset_left = 112.0
+offset_top = 696.0
+offset_right = 562.0
+offset_bottom = 727.0
+columns = 3
+
+[node name="Button" type="Button" parent="GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer1"
+
+[node name="Button2" type="Button" parent="GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer2"
+
+[node name="Button3" type="Button" parent="GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer3"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="UnlockButton" to="." method="unlock_current_step"]

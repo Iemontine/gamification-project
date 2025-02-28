@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2rto2wwl4q0"]
+[gd_scene load_steps=12 format=3 uid="uid://d2rto2wwl4q0"]
 
 [ext_resource type="Script" uid="uid://bhcutbc8g8em" path="res://neuron.gd" id="1_hmcdc"]
 [ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="2_qagqb"]
@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="4_j2ct8"]
 
 [sub_resource type="Gradient" id="Gradient_hrwgj"]
-offsets = PackedFloat32Array(0.947917, 1)
-colors = PackedColorArray(0.25, 0.25, 0.25, 0, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.959432, 1)
+colors = PackedColorArray(0.248401, 0.2484, 0.2484, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mms1l"]
 gradient = SubResource("Gradient_hrwgj")
@@ -19,7 +19,7 @@ fill_to = Vector2(0.9, 0.2)
 
 [sub_resource type="Curve2D" id="Curve2D_j2aws"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -47.5, 45, 0, 50, 0, -50, 0, -1, 0, 0, 0, 0, 47.5, -45)
+"points": PackedVector2Array(0, 0, 0, 0, -50, 50, 0, 50, 0, -50, 0, -1, 0, 0, 0, 0, 50, -50)
 }
 point_count = 3
 
@@ -50,18 +50,6 @@ height = 70
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmcdc"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2aws"]
 light_mode = 1
@@ -99,30 +87,14 @@ scale = Vector2(0.2, 0.2)
 texture = SubResource("GradientTexture2D_qagqb")
 
 [node name="Threshold" type="Line2D" parent="Neuron/ActivationFunction"]
-rotation = 1.5708
-points = PackedVector2Array(0, 50, 0, -50)
+points = PackedVector2Array(0, 70, 0, -70)
 width = 3.025
 default_color = Color(1, 0, 0, 1)
 
 [node name="Line2D" type="Line2D" parent="Neuron/ActivationFunction"]
-points = PackedVector2Array(-47.5, 45, -45.459, 45.0742, -43.1165, 45.0396, -40.0781, 44.8438, -36.4832, 44.4019, -32.4707, 43.6289, -28.1799, 42.4399, -23.75, 40.75, -19.3201, 38.4741, -17.1486, 37.0899, -15.0293, 35.5273, -12.9796, 33.7758, -11.0168, 31.8247, -9.15848, 29.6634, -7.42188, 27.2813, -5.82443, 24.6677, -4.38354, 21.812, -3.11661, 18.7037, -2.04102, 15.332, -1.17416, 11.6865, -0.533447, 7.75635, -0.136261, 3.53107, 0, -1, 0.136261, -5.52533, 0.533447, -9.73389, 1.17416, -13.637, 2.04102, -17.2461, 3.11661, -20.5724, 4.38354, -23.6274, 5.82443, -26.4224, 7.42188, -28.9688, 9.15848, -31.2778, 11.0168, -33.3608, 12.9796, -35.2293, 15.0293, -36.8945, 17.1486, -38.3679, 19.3201, -39.6606, 23.75, -41.75, 28.1799, -43.2534, 32.4707, -44.2617, 36.4832, -44.8657, 40.0781, -45.1563, 43.1165, -45.2241, 45.459, -45.1602, 47.5, -45)
+points = PackedVector2Array(-50, 50, -47.8516, 49.8594, -45.3857, 49.5781, -42.1875, 49.0625, -38.4033, 48.2422, -34.1797, 47.0469, -29.6631, 45.4063, -27.3407, 44.397, -25, 43.25, -22.6593, 41.9565, -20.3369, 40.5078, -18.0511, 38.895, -15.8203, 37.1094, -13.6627, 35.1421, -11.5967, 32.9844, -9.6405, 30.6274, -7.8125, 28.0625, -6.13098, 25.2808, -4.61426, 22.2734, -3.28064, 19.0317, -2.14844, 15.5469, -1.23596, 11.8101, -0.561523, 7.8125, -0.143433, 3.54541, 0, -1, 0.143433, -5.53967, 0.561523, -9.79004, 1.23596, -13.7606, 2.14844, -17.4609, 3.28064, -20.9005, 4.61426, -24.0889, 6.13098, -27.0355, 7.8125, -29.75, 9.6405, -32.2418, 11.5967, -34.5205, 13.6627, -36.5956, 15.8203, -38.4766, 18.0511, -40.173, 20.3369, -41.6943, 22.6593, -43.0502, 25, -44.25, 27.3407, -45.3033, 29.6631, -46.2197, 34.1797, -47.6797, 38.4033, -48.7061, 42.1875, -49.375, 45.3857, -49.7627, 47.8516, -49.9453, 50, -50)
 width = 3.0
 default_color = Color(0.188235, 0.54902, 0.427451, 1)
-
-[node name="Panel" type="Panel" parent="Neuron"]
-custom_minimum_size = Vector2(100, 100)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -125.0
-offset_right = -25.0
-offset_bottom = -25.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hmcdc")
 
 [node name="Lamp" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_j2aws")

@@ -5,10 +5,9 @@ var threshold: float = 1.0
 @onready var slider1: HSlider = $Slider1
 @onready var slider2: HSlider = $Slider2
 @onready var threshold_slider: HSlider = $ThresholdSlider
-@onready var threshold_line: Line2D = $ActivationFunction/Threshold
+@onready var threshold_line: Line2D = $Neuron/ActivationFunction/Threshold
 @onready var lamp: Sprite2D = $Lamp
-@onready var activation_function: Path2D = $ActivationFunction
-@onready var path: Path2D = $ActivationFunction
+@onready var activation_function: Path2D = $Neuron/ActivationFunction
 
 func _ready() -> void:
 	# Set up threshold slider range (max is 2.0 since both sliders can be 1.0)
@@ -34,10 +33,10 @@ func update_neuron_state(sum: float) -> void:
 
 func update_graph_position(sum: float) -> void:
 	var progress = clamp(sum / 2.0, 0.0, 1.0)  # Changed to divide by 2.0 instead of THRESHOLD
-	var point_position = path.curve.sample_baked(progress * path.curve.get_baked_length())
-	$ActivationFunction/GraphPos.position = point_position
+	var point_position = activation_function.curve.sample_baked(progress * activation_function.curve.get_baked_length())
+	$Neuron/ActivationFunction/GraphPos.position = point_position
 
 func update_threshold_line() -> void:
 	var progress = clamp(threshold / 2.0, 0.0, 1.0)
 	var point = activation_function.curve.sample_baked(progress * activation_function.curve.get_baked_length())
-	threshold_line.position.x = point.x
+	threshold_line.position.y = point.y

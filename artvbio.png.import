@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hdof3yingscw"
-valid=false
+uid="uid://d1lhjnlp6j5dk"
+path="res://.godot/imported/artvbio.png-12bc395409f046b6c92cb68440c42929.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://frame_19_delay-0.1s.png"
+source_file="res://artvbio.png"
+dest_files=["res://.godot/imported/artvbio.png-12bc395409f046b6c92cb68440c42929.ctex"]
 
 [params]
 
