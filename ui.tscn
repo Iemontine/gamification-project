@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cptj3m7nmaarl"]
+[gd_scene load_steps=9 format=3 uid="uid://cptj3m7nmaarl"]
 
 [ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron_slider.tscn" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://b7je2mjbc7mpj" path="res://scripts/ui.gd" id="1_m6e0p"]
@@ -19,25 +19,6 @@ minimum_velocity = 0.4
 rebound_strength = 7.0
 
 [sub_resource type="Theme" id="Theme_n5ude"]
-
-[sub_resource type="GDScript" id="GDScript_ibotj"]
-script/source = "extends Button
-
-func _ready():
-	# Hide the button initially
-	modulate.a = 0  # Set alpha to 0 (fully transparent)
-	# Create a timer to show the button after 10 seconds
-	var timer = get_tree().create_timer(5.0)
-	timer.timeout.connect(_on_timer_timeout)
-
-func _on_timer_timeout():
-	# Create a tween to fade the button in
-	var tween = create_tween()
-	tween.tween_property(self, \"modulate:a\", 1.0, 1.0)  # Fade from 0 to 1 over 1 second
-"
-
-[sub_resource type="LabelSettings" id="LabelSettings_nltto"]
-font_color = Color(0, 0, 0, 1)
 
 [node name="Ui2" type="Control"]
 layout_mode = 3
@@ -65,10 +46,6 @@ size_flags_vertical = 3
 layout_mode = 2
 columns = 3
 
-[node name="BackButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
-layout_mode = 2
-text = "Back"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
@@ -85,7 +62,6 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Page1" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-visible = false
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
 vertical_scroll_mode = 2
@@ -98,12 +74,15 @@ metadata/_custom_type_script = "uid://budj5i72ek58w"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1"]
 layout_mode = 2
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Section1" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element1"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -113,23 +92,129 @@ text = "The brain contains more than 80 billion cells — called neurons — whi
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Element2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element2"]
 layout_mode = 2
 texture = ExtResource("4_ibotj")
 expand_mode = 5
 
-[node name="NextButton2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3"]
+layout_mode = 2
+vertical = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-text = "Next"
-script = SubResource("GDScript_ibotj")
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+fit_content = true
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Button" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer1"
+
+[node name="Button2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer2"
+
+[node name="Button3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer3"
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Continue"
+
+[node name="Section2" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element1"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element2"]
+layout_mode = 2
+texture = ExtResource("4_ibotj")
+expand_mode = 5
+
+[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3"]
+layout_mode = 2
+vertical = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
+fit_content = true
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Button" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer1"
+
+[node name="Button2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer2"
+
+[node name="Button3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3/BoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Answer3"
 
 [node name="Page2" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
+visible = false
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
 vertical_scroll_mode = 2
@@ -183,6 +268,21 @@ metadata/_custom_type_script = "uid://budj5i72ek58w"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3"]
 layout_mode = 2
 
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Element1"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Page 3."
+fit_content = true
+horizontal_alignment = 1
+
 [node name="Page4" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
 custom_minimum_size = Vector2(500, 550)
@@ -196,6 +296,21 @@ metadata/_custom_type_script = "uid://budj5i72ek58w"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4"]
 layout_mode = 2
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4/VBoxContainer/Element1"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Page 4."
+fit_content = true
+horizontal_alignment = 1
 
 [node name="Page5" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 visible = false
@@ -212,49 +327,19 @@ metadata/_custom_type_script = "uid://budj5i72ek58w"
 layout_mode = 2
 
 [node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 30
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer/Element1"]
 layout_mode = 2
 mouse_filter = 1
-text = "This is a neuron!"
-label_settings = SubResource("LabelSettings_nltto")
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Page 5."
+fit_content = true
 horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer"]
-custom_minimum_size = Vector2(500, 250)
-layout_mode = 2
-theme_override_constants/margin_top = 250
-
-[node name="NeuronSlider" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer/Element2" instance=ExtResource("1_fyqef")]
-position = Vector2(288.195, 125)
-
-[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer"]
-custom_minimum_size = Vector2(500, 250)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer/Element3"]
-custom_minimum_size = Vector2(0, 500)
-layout_mode = 2
-mouse_filter = 1
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis porta facilisis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce tincidunt venenatis pellentesque. Mauris tristique tincidunt velit, elementum tincidunt lorem pharetra non. Donec egestas, libero id faucibus fermentum, dui risus egestas ligula, quis consequat augue urna nec augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis lacinia tellus bibendum interdum euismod.
-
-Vestibulum eu ultrices ex. Etiam tempor ex a pretium venenatis. Vestibulum convallis auctor neque a facilisis. Vestibulum accumsan rutrum venenatis. Nunc tempus enim quis porttitor placerat. Quisque egestas malesuada felis. Integer eu justo et eros faucibus hendrerit eget eu turpis. Sed nec metus ac tellus ultricies mollis. Donec vitae pellentesque lorem. Morbi pulvinar nec sapien id tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet felis ornare felis faucibus mollis. Fusce sed urna convallis, placerat neque eget, euismod elit. Maecenas porta lorem ut dictum egestas. Vestibulum nec dolor in ipsum accumsan vehicula non sit amet lectus.
-
-Morbi ullamcorper, enim eget pharetra faucibus, erat lectus pretium ipsum, nec ultrices libero nibh eget ante. Maecenas augue tortor, semper nec tortor et, laoreet pretium nisl. Nulla elementum facilisis nunc a tempor. Aenean accumsan dapibus arcu lacinia porta. Etiam nisi urna, varius vel felis id, vehicula porttitor felis. Quisque sagittis odio et metus laoreet, ut sagittis tellus sodales. Nullam pretium, felis vitae elementum molestie, turpis orci pulvinar sapien, a vehicula lacus ipsum vitae libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-
-Sed in pellentesque nulla, quis posuere purus. Phasellus at finibus nisi. Aenean sed lorem convallis, tincidunt justo quis, feugiat nibh. Mauris rutrum eleifend elit eget pulvinar. Mauris turpis nibh, dignissim tincidunt metus a, rutrum aliquet sapien. Nulla malesuada ligula magna, quis gravida lorem convallis nec. Praesent ut sapien ipsum. Nunc nunc dui, commodo non rhoncus at, euismod sodales nunc. Phasellus elementum semper felis nec ultricies. Integer elementum dictum nisl ut laoreet. Praesent non risus tempor, gravida mi eu, sollicitudin massa. Donec sed nulla ligula. Sed at mi ut tortor ultricies iaculis id in lacus.
-
-Suspendisse non nisi sagittis, pulvinar eros ut, dapibus urna. Duis hendrerit ullamcorper rutrum. Phasellus dignissim lorem quis tincidunt posuere. Vivamus eget vulputate tortor, non consectetur urna. Integer dignissim scelerisque euismod. Vivamus sit amet justo facilisis, sollicitudin velit ut, hendrerit turpis. Sed placerat rutrum vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris at augue dolor. Nam semper, lacus vel interdum ultricies, eros ipsum facilisis nisi, sed vestibulum mauris tellus vel justo. Proin quis nisl elit. Aenean gravida ante in dui consequat fringilla a a nibh. Sed sed velit erat. Cras porta quam eget lorem maximus congue. Proin varius tincidunt dictum. "
-label_settings = SubResource("LabelSettings_nltto")
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="NextButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
-layout_mode = 2
-text = "Next"
 
 [node name="UnlockButton" type="Button" parent="."]
 layout_mode = 0
@@ -262,6 +347,4 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "unlock"
 
-[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="UnlockButton" to="." method="unlock_current_step"]
