@@ -1,9 +1,38 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2rto2wwl4q0"]
+[gd_scene load_steps=17 format=3 uid="uid://d2rto2wwl4q0"]
 
 [ext_resource type="Script" uid="uid://bhcutbc8g8em" path="res://neuron.gd" id="1_hmcdc"]
 [ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="2_qagqb"]
 [ext_resource type="Script" path="res://lamp.gd" id="3_ril1o"]
 [ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="4_j2ct8"]
+
+[sub_resource type="Curve2D" id="Curve2D_hmcdc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 135, 19, 0, 0, 10.4097, 1.27731, 187, 50)
+}
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_qagqb"]
+script/source = "@tool
+
+# Connector
+
+extends Path2D
+
+
+@onready var line_2d: Line2D = $Line2D
+
+
+func _physics_process(delta: float) -> void:
+	if line_2d:
+		var points = curve.get_baked_points()
+		line_2d.points = points
+"
+
+[sub_resource type="Curve2D" id="Curve2D_qagqb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 135, 19, 0, 0, 10.4097, 1.27731, 187, -13)
+}
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_hrwgj"]
 offsets = PackedFloat32Array(0.947917, 1)
@@ -26,6 +55,7 @@ point_count = 3
 [sub_resource type="GDScript" id="GDScript_hmcdc"]
 script/source = "@tool
 
+# Activation Function
 
 extends Path2D
 
@@ -33,7 +63,7 @@ extends Path2D
 @onready var line_2d: Line2D = $Line2D
 
 
-func _ready() -> void:
+func _physics_process(delta: float) -> void:
 	if line_2d:
 		var points = curve.get_baked_points()
 		line_2d.points = points
@@ -66,10 +96,17 @@ corner_radius_bottom_left = 10
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2aws"]
 light_mode = 1
 
+[sub_resource type="Curve2D" id="Curve2D_ril1o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 118, -74, 0, 0, 10.4097, 1.27731, 182, -74)
+}
+point_count = 2
+
 [node name="NeuronSlider" type="Node2D"]
 script = ExtResource("1_hmcdc")
 
 [node name="Slider1" type="HSlider" parent="."]
+z_index = 1
 offset_left = -236.0
 offset_top = -50.0
 offset_right = -100.0
@@ -78,7 +115,17 @@ max_value = 1.0
 step = 0.05
 metadata/_edit_use_anchors_ = true
 
+[node name="Connector" type="Path2D" parent="Slider1"]
+curve = SubResource("Curve2D_hmcdc")
+script = SubResource("GDScript_qagqb")
+
+[node name="Line2D" type="Line2D" parent="Slider1/Connector"]
+points = PackedVector2Array(135, 19, 137.234, 20.332, 139.799, 21.8608, 143.125, 23.8438, 147.061, 26.1899, 149.209, 27.4709, 151.453, 28.8086, 153.773, 30.1917, 156.15, 31.6089, 158.566, 33.0488, 161, 34.5, 163.434, 35.9512, 165.85, 37.3911, 168.227, 38.8083, 170.547, 40.1914, 172.791, 41.5291, 174.939, 42.8101, 178.875, 45.1563, 182.201, 47.1392, 184.766, 48.668, 187, 50)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
 [node name="Slider2" type="HSlider" parent="."]
+z_index = 1
 offset_left = -236.0
 offset_top = 13.0
 offset_right = -100.0
@@ -86,6 +133,15 @@ offset_bottom = 51.0
 max_value = 1.0
 step = 0.05
 metadata/_edit_use_anchors_ = true
+
+[node name="Connector" type="Path2D" parent="Slider2"]
+curve = SubResource("Curve2D_qagqb")
+script = SubResource("GDScript_qagqb")
+
+[node name="Line2D" type="Line2D" parent="Slider2/Connector"]
+points = PackedVector2Array(135, 19, 137.234, 17.625, 139.799, 16.0469, 143.125, 14, 147.061, 11.5781, 149.209, 10.2559, 151.453, 8.875, 153.773, 7.44727, 156.15, 5.98438, 158.566, 4.49805, 161, 3, 163.434, 1.50195, 165.85, 0.015625, 168.227, -1.44727, 170.547, -2.875, 172.791, -4.25586, 174.939, -5.57813, 178.875, -8, 182.201, -10.0469, 184.766, -11.625, 187, -13)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="Neuron" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_mms1l")
@@ -126,8 +182,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hmcdc")
 
 [node name="Lamp" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_j2aws")
-position = Vector2(150, 1)
-scale = Vector2(0.0608333, 0.0608333)
+position = Vector2(150, 0)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("2_qagqb")
 script = ExtResource("3_ril1o")
 
@@ -135,6 +191,16 @@ script = ExtResource("3_ril1o")
 position = Vector2(0, -65.7534)
 scale = Vector2(4.68493, 4.68493)
 texture = ExtResource("4_j2ct8")
+
+[node name="Connector" type="Path2D" parent="."]
+position = Vector2(-68, 74)
+curve = SubResource("Curve2D_ril1o")
+script = SubResource("GDScript_qagqb")
+
+[node name="Line2D" type="Line2D" parent="Connector"]
+points = PackedVector2Array(118, -74, 120.75, -74, 123.906, -74, 128, -74, 132.844, -74, 135.488, -74, 138.25, -74, 141.105, -74, 144.031, -74, 147.004, -74, 150, -74, 152.996, -74, 155.969, -74, 158.895, -74, 161.75, -74, 164.512, -74, 167.156, -74, 172, -74, 176.094, -74, 179.25, -74, 182, -74)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="ThresholdSlider" type="HSlider" parent="."]
 offset_left = -68.0

@@ -77,6 +77,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Page1" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
+visible = false
 custom_minimum_size = Vector2(608, 600)
 layout_mode = 2
 vertical_scroll_mode = 2
@@ -289,7 +290,6 @@ mouse_filter = 1
 text = "Next"
 
 [node name="Page2" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-visible = false
 custom_minimum_size = Vector2(608, 600)
 layout_mode = 2
 vertical_scroll_mode = 2
