@@ -5,8 +5,8 @@ extends Control
 var current_page = 0
 
 
-@onready var container = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer
-@onready var progress_bar: ProgressBar = $MarginContainer/CenterContainer/GridContainer/VBoxContainer/ProgessContainer/ProgressBar
+@onready var container = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer
+@onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/ProgessContainer/ProgressBar
 #@onready var back_button: Button = $MarginContainer/CenterContainer/GridContainer/BackButton
 #@onready var next_button: Button = $MarginContainer/CenterContainer/GridContainer/NextButton
 @onready var pages = []
@@ -40,8 +40,8 @@ func _on_back_button_pressed():
 
 func navigate(direction):
 	var next_page = current_page
-	
-	if direction > 0:
+
+	if direction == 1:
 		# Moving forward
 		if current_page < pages.size() - 1: next_page += 1
 		else: return

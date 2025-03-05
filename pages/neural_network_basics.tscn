@@ -1,0 +1,186 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfpk7s5xbjs4p"]
+
+[ext_resource type="Script" uid="uid://yoefhs7bu1ks" path="res://page.gd" id="1_qqt5j"]
+[ext_resource type="PackedScene" uid="uid://4aaxmxmdoh3w" path="res://multi_neuron_network.tscn" id="2_xnrl8"]
+[ext_resource type="Script" uid="uid://budj5i72ek58w" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="3_y2tvp"]
+[ext_resource type="Script" uid="uid://bkacjpeepn4sq" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="4_ldfhm"]
+
+[sub_resource type="Resource" id="Resource_ibotj"]
+script = ExtResource("4_ldfhm")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Resource" id="Resource_33cm8"]
+script = ExtResource("4_ldfhm")
+friction = 4.0
+minimum_velocity = 0.4
+rebound_strength = 7.0
+
+[sub_resource type="Theme" id="Theme_n5ude"]
+
+[node name="NeuralNetworkBasics" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_y2tvp")
+wheel_scroll_damper = SubResource("Resource_ibotj")
+dragging_scroll_damper = SubResource("Resource_33cm8")
+allow_horizontal_scroll = false
+hide_scrollbar_over_time = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_qqt5j")
+
+[node name="Section1" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="VBoxContainer/Section1"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Section1/Element1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Understanding Simple Neural Networks"
+horizontal_alignment = 1
+
+[node name="Element2" type="MarginContainer" parent="VBoxContainer/Section1"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Section1/Element2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Neural networks are made up of interconnected units called [b]neurons[/b]. Each neuron receives signals from other neurons, processes them, and sends its own signal forward.
+
+The key components of a neural network are:
+• Input neurons - receive initial data
+• Hidden neurons - process information
+• Output neurons - provide the final result
+• Weights - determine the strength of connections
+• Activation functions - decide if a neuron fires"
+fit_content = true
+
+[node name="Element3" type="MarginContainer" parent="VBoxContainer/Section1"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Section1/Element3"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Each connection between neurons has a [b]weight[/b] that amplifies or reduces the signal strength. A neuron activates when the sum of its weighted inputs exceeds a [b]threshold[/b]."
+fit_content = true
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer/Section1"]
+layout_mode = 2
+mouse_filter = 1
+text = "Continue"
+
+[node name="Section2" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="VBoxContainer/Section2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Section2/Element1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "A Simple 3-Neuron Network"
+horizontal_alignment = 1
+
+[node name="Element2" type="MarginContainer" parent="VBoxContainer/Section2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Section2/Element2"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_n5ude")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Below is a simple neural network with two input neurons and one output neuron. Try adjusting the input values (sliders) to see how they affect the output.
+
+Notice how Neuron 1 has a stronger connection (weight = 0.7) compared to Neuron 2 (weight = 0.3). This means Neuron 1 has more influence on whether the output neuron activates."
+fit_content = true
+
+[node name="Element3" type="MarginContainer" parent="VBoxContainer/Section2"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+
+[node name="MultiNeuronNetwork" parent="VBoxContainer/Section2/Element3" instance=ExtResource("2_xnrl8")]
+position = Vector2(300, 200)
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer/Section2"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "Continue"
+
+[node name="Section3" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="VBoxContainer/Section3"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Section3/Element1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "How Neural Networks Learn"
+horizontal_alignment = 1
+
+[node name="Element2" type="MarginContainer" parent="VBoxContainer/Section3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Section3/Element2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Neural networks learn by adjusting their weights. During training:
+
+1. The network makes a prediction using current weights
+2. The prediction is compared to the correct answer
+3. Weights are adjusted to reduce the error
+4. This process repeats thousands of times
+
+Through this process, neural networks can learn complex patterns in data, allowing them to solve problems like image recognition, language translation, and game playing."
+fit_content = true
+
+[node name="Element3" type="MarginContainer" parent="VBoxContainer/Section3"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Section3/Element3"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "If neural networks were only 3 neurons like our example, they wouldn't be very powerful. Real neural networks can contain millions or even billions of neurons organized in many layers. This is why they're called \"deep\" neural networks."
+fit_content = true
+
+[node name="NextButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Next Lesson"
+
+[connection signal="done" from="VBoxContainer/Section2/Element3/MultiNeuronNetwork" to="VBoxContainer" method="_on_neuron_simulator_done" binds= [NodePath("../ContinueButton")]]

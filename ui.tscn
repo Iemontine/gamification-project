@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cptj3m7nmaarl"]
+[gd_scene load_steps=13 format=3 uid="uid://cptj3m7nmaarl"]
 
 [ext_resource type="PackedScene" uid="uid://d2rto2wwl4q0" path="res://neuron_slider.tscn" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://b7je2mjbc7mpj" path="res://scripts/ui.gd" id="1_m6e0p"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://deyt5hjgo2irv" path="res://assets/neuron_explainer.jpg" id="4_ibotj"]
 [ext_resource type="Texture2D" uid="uid://d1lhjnlp6j5dk" path="res://artvbio.png" id="6_y4yjw"]
 [ext_resource type="Texture2D" uid="uid://c5twhsascw63f" path="res://exampls.png" id="7_waa4j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waa4j"]
 
 [sub_resource type="Resource" id="Resource_ibotj"]
 script = ExtResource("3_ibotj")
@@ -22,18 +24,6 @@ minimum_velocity = 0.4
 rebound_strength = 7.0
 
 [sub_resource type="Theme" id="Theme_n5ude"]
-
-[sub_resource type="Resource" id="Resource_n5ude"]
-script = ExtResource("3_ibotj")
-friction = 4.0
-minimum_velocity = 0.4
-rebound_strength = 7.0
-
-[sub_resource type="Resource" id="Resource_y4yjw"]
-script = ExtResource("3_ibotj")
-friction = 4.0
-minimum_velocity = 0.4
-rebound_strength = 7.0
 
 [node name="Ui2" type="Control"]
 layout_mode = 3
@@ -52,33 +42,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_waa4j")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
-[node name="ProgessContainer" type="PanelContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+[node name="ProgessContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/ProgessContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/ProgessContainer"]
 custom_minimum_size = Vector2(600, 15)
 layout_mode = 2
 show_percentage = false
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 545)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Page1" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-visible = false
-custom_minimum_size = Vector2(608, 600)
+[node name="Page1" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
@@ -87,20 +85,20 @@ dragging_scroll_damper = SubResource("Resource_waa4j")
 allow_horizontal_scroll = false
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1"]
+custom_minimum_size = Vector2(537.5, 545)
 layout_mode = 2
+alignment = 1
 script = ExtResource("2_n5ude")
 
-[node name="Section1" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
+[node name="Section1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 layout_mode = 2
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element1"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -109,22 +107,22 @@ text = "The brain contains more than 80 billion cells — called neurons — whi
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element2"]
 layout_mode = 2
 texture = ExtResource("4_ibotj")
 expand_mode = 5
 
-[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
+[node name="Element3" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -134,21 +132,21 @@ text = "One neuron doesn't talk directly with all 80 billion others. Rather, the
 fit_content = true
 horizontal_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section1"]
 layout_mode = 2
 mouse_filter = 1
 text = "Continue"
 
-[node name="Section2" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Section2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
 visible = false
 layout_mode = 2
+alignment = 1
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-theme_override_constants/margin_top = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element1"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -158,18 +156,18 @@ text = "The human brain is too complex to discuss in much detail here, but we do
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
+[node name="Element3" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -179,22 +177,21 @@ text = "Each time you learn a new game, a dance, or a mathematical skill, neuron
 fit_content = true
 horizontal_alignment = 1
 
-[node name="ContinueButton2" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
-visible = false
+[node name="ContinueButton2" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section2"]
 layout_mode = 2
 mouse_filter = 1
 text = "Continue"
 
-[node name="Section3" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Section3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
 visible = false
 layout_mode = 2
+alignment = 1
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-theme_override_constants/margin_top = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element1"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -204,23 +201,23 @@ text = "[b]Artifical Neural Networks[/b] — ANNs, for short — were invented i
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element2"]
 layout_mode = 2
 texture = ExtResource("6_y4yjw")
 expand_mode = 5
 
-[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
+[node name="Element3" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -230,22 +227,21 @@ text = "But, in recent years, they have taken on a life of their own."
 fit_content = true
 horizontal_alignment = 1
 
-[node name="ContinueButton3" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
-visible = false
+[node name="ContinueButton3" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section3"]
 layout_mode = 2
 mouse_filter = 1
 text = "Continue"
 
-[node name="Section4" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
+[node name="Section4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
 visible = false
 layout_mode = 2
+alignment = 1
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-theme_override_constants/margin_top = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element1"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -255,23 +251,23 @@ text = "Computers today can follow billions of individual instructions each seco
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+[node name="Element2" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element2"]
 layout_mode = 2
 texture = ExtResource("7_waa4j")
 expand_mode = 5
 
-[node name="Element3" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
+[node name="Element3" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/Element3"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_n5ude")
@@ -283,142 +279,140 @@ At the end of this lesson, you'll have an opportunity to play with an ANN that w
 fit_content = true
 horizontal_alignment = 1
 
-[node name="NextButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer"]
-visible = false
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4"]
 layout_mode = 2
 mouse_filter = 1
 text = "Next"
 
-[node name="Page2" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-custom_minimum_size = Vector2(608, 600)
+[node name="Page2" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
+visible = false
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
+wheel_scroll_damper = SubResource("Resource_ibotj")
+dragging_scroll_damper = SubResource("Resource_waa4j")
 allow_horizontal_scroll = false
 hide_scrollbar_over_time = true
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2"]
-custom_minimum_size = Vector2(600, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2"]
+custom_minimum_size = Vector2(537.5, 545)
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_n5ude")
+
+[node name="Section1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1"]
 layout_mode = 2
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1/Element1"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "The brain contains more than 80 billion cells — called neurons — which exchange [b]information[/b] with one another via small pulses of electricity. "
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Element2" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
+[node name="Element2" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1"]
+custom_minimum_size = Vector2(0, 157.15)
 layout_mode = 2
-theme_override_constants/margin_top = 30
 
-[node name="Panel" type="Panel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Element2"]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="NeuronSlider" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Element2/Panel" instance=ExtResource("1_fyqef")]
+[node name="NeuronSlider" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1/Element2" instance=ExtResource("1_fyqef")]
 position = Vector2(300, 50)
 
-[node name="Page3" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1/Element2"]
 visible = false
-custom_minimum_size = Vector2(608, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section1"]
+layout_mode = 2
+mouse_filter = 1
+text = "Continue"
+
+[node name="Section2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section2/Element1"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Great work!"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section2"]
+layout_mode = 2
+mouse_filter = 1
+text = "Next"
+
+[node name="Page3" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
+visible = false
 layout_mode = 2
 vertical_scroll_mode = 2
 script = ExtResource("2_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
+wheel_scroll_damper = SubResource("Resource_ibotj")
+dragging_scroll_damper = SubResource("Resource_waa4j")
 allow_horizontal_scroll = false
 hide_scrollbar_over_time = true
 metadata/_custom_type_script = "uid://budj5i72ek58w"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3"]
+custom_minimum_size = Vector2(537.5, 545)
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_n5ude")
+
+[node name="Section1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section1"]
 layout_mode = 2
 
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Element1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section1/Element1"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_n5ude")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "Page 3."
+text = "Test"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Page4" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-visible = false
-custom_minimum_size = Vector2(608, 0)
-layout_mode = 2
-vertical_scroll_mode = 2
-script = ExtResource("2_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
-allow_horizontal_scroll = false
-hide_scrollbar_over_time = true
-metadata/_custom_type_script = "uid://budj5i72ek58w"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4"]
-layout_mode = 2
-
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page4/VBoxContainer/Element1"]
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section1"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_n5ude")
+text = "Continue"
+
+[node name="Section2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Element1" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section2/Element1"]
+layout_mode = 2
+mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "Page 4."
+text = "Mweps"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Page5" type="ScrollContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer"]
-visible = false
-custom_minimum_size = Vector2(608, 0)
-layout_mode = 2
-vertical_scroll_mode = 2
-script = ExtResource("2_nltto")
-wheel_scroll_damper = SubResource("Resource_n5ude")
-dragging_scroll_damper = SubResource("Resource_y4yjw")
-hide_scrollbar_over_time = true
-metadata/_custom_type_script = "uid://budj5i72ek58w"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5"]
-layout_mode = 2
-
-[node name="Element1" type="MarginContainer" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page5/VBoxContainer/Element1"]
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section2"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_n5ude")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-text = "Page 5."
-fit_content = true
-horizontal_alignment = 1
+text = "Next"
 
 [node name="UnlockButton" type="Button" parent="."]
 layout_mode = 0
@@ -449,5 +443,7 @@ layout_mode = 2
 mouse_filter = 1
 text = "Answer3"
 
-[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page1/VBoxContainer/Section4/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page2/VBoxContainer/Section2/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/VBoxContainer/AspectRatioContainer/Page3/VBoxContainer/Section2/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="UnlockButton" to="." method="unlock_current_step"]

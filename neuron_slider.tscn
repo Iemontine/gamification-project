@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhcutbc8g8em" path="res://neuron.gd" id="1_hmcdc"]
 [ext_resource type="Texture2D" uid="uid://ba3thwwlffu50" path="res://lampon.png" id="2_qagqb"]
-[ext_resource type="Script" path="res://lamp.gd" id="3_ril1o"]
+[ext_resource type="Script" uid="uid://bjxbv8yqv7a18" path="res://lamp.gd" id="3_ril1o"]
 [ext_resource type="Texture2D" uid="uid://bbrdr75s48geo" path="res://pixellight.png" id="4_j2ct8"]
 
 [sub_resource type="Curve2D" id="Curve2D_hmcdc"]
@@ -22,7 +22,7 @@ extends Path2D
 @onready var line_2d: Line2D = $Line2D
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if line_2d:
 		var points = curve.get_baked_points()
 		line_2d.points = points
@@ -63,7 +63,7 @@ extends Path2D
 @onready var line_2d: Line2D = $Line2D
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if line_2d:
 		var points = curve.get_baked_points()
 		line_2d.points = points
